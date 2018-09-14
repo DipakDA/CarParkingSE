@@ -1,0 +1,19 @@
+{
+  "name": "carparkingse",
+  "version": "1.0.0",
+  "description": "This is the Github Main repository for the SE project Automated Car Parking.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DipakDA/CarParkingSE.git"
+  },
+  "author": "Dipak Agrawal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DipakDA/CarParkingSE/issues"
+  },
+  "homepage": "https://github.com/DipakDA/CarParkingSE#readme"
+}
