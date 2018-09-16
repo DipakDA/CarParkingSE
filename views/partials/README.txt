@@ -1,1 +1,1 @@
-just like that
+Create a table.html file.
