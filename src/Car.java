@@ -1,13 +1,10 @@
 import java.lang.Math;
 import java.util.Scanner;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
-public class Car extends JFrame implements Runnable{
+public class Car{
 	/**
 	 * 
 	 */
@@ -26,8 +23,6 @@ public class Car extends JFrame implements Runnable{
 	private Pair frontWheel;
 	private Pair backWheel;
 	//current state of car
-	private PrintWriter out;
-	
 	
 	public Car(Pair carLocation, double carHeading, double carSpeed, double steerAngle, double wheelBase)
 	{
@@ -40,12 +35,6 @@ public class Car extends JFrame implements Runnable{
 		//front wheel position(actual)
 		backWheel = new Pair(false, carLocation, this.wheelBase, carHeading);
 		//back wheel position(actual)		
-		
-		setTitle("2D Car rendering");
-		setSize(300, 200);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
 		
 		printData();
 	}
@@ -68,18 +57,7 @@ public class Car extends JFrame implements Runnable{
 	
 	public void printData()
 	{
-		/*try {
-			FileWriter fw = new FileWriter("OUTPUT.txt", true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			out = new PrintWriter(bw);
-			out.println(carLocation.x);
-			out.println(carLocation.y);
-			out.println(carHeading);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}*/
+	
 		System.out.println(carLocation.x);
 		System.out.println(carLocation.y);
 		System.out.println(carHeading);
@@ -102,23 +80,17 @@ public class Car extends JFrame implements Runnable{
 				}
 			}
 		}.start();
-		
-		long lastTime = System.nanoTime();
-		final double ns = 1000000000.0 / 60.0;//60 times per second
-		double delta = 0;
-		while(running) {
-			long now = System.nanoTime();
-			delta = delta + ((now-lastTime) / ns);
-			lastTime = now;
-			while (delta >= 1)//Make sure update is only happening 60 times a second
-			{
+
 				//handles all of the logic restricted time
 				update();
-				delta--;
+				//repaint();
 				
-			}
-			
-		}
+				try {
+					TimeUnit.MILLISECONDS.sleep(50);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 	
 	/*private void render() {
@@ -126,7 +98,27 @@ public class Car extends JFrame implements Runnable{
 		paint(g);
 	}*/
 	
-	public synchronized void stopRunning() {
+	public Pair getCarLocation() {
+		return this.carLocation;
+	}
+	
+	public double getCarHeading() {
+		return this.carHeading;
+	}
+	
+	public Pair getBackWheel() {
+		return this.backWheel;
+	}
+	
+	public Pair getFrontWheel() {
+		return this.frontWheel;
+	}
+	
+	public boolean getRunning() {
+		return this.running;
+	}
+	
+	public void stopRunning() {
 		running = false;
 	}
 	
