@@ -68,7 +68,7 @@ public class Car extends JFrame implements Runnable{
 	
 	public void printData()
 	{
-		try {
+		/*try {
 			FileWriter fw = new FileWriter("OUTPUT.txt", true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			out = new PrintWriter(bw);
@@ -79,11 +79,15 @@ public class Car extends JFrame implements Runnable{
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
+		System.out.println(carLocation.x);
+		System.out.println(carLocation.y);
+		System.out.println(carHeading);
 	}
 	
 	public void run()
 	{
+		//this thread is for keyboard interrupt to stop the code
 		new Thread() {
 			public void run() {
 				try (Scanner scanner = new Scanner(System.in)) {
