@@ -122,4 +122,8 @@ public class Car{
 		running = false;
 	}
 	
+	public void setSteerAngle(double angle) {
+		this.steerAngle = angle;
+	}
+	
 }
