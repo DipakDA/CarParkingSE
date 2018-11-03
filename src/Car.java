@@ -24,7 +24,9 @@ public class Car{
 	private Pair backWheel;
 	//current state of car
 	
-	public Car(Pair carLocation, double carHeading, double carSpeed, double steerAngle, double wheelBase)
+	private double carWidth;
+	
+	public Car(Pair carLocation, double carHeading, double carSpeed, double steerAngle, double wheelBase, double carWidth)
 	{
 		this.carLocation = carLocation;
 		this.carHeading = carHeading;
@@ -36,23 +38,32 @@ public class Car{
 		backWheel = new Pair(false, carLocation, this.wheelBase, carHeading);
 		//back wheel position(actual)		
 		
+		this.carWidth = carWidth;
+		
 		printData();
 	}
 	
 	
 	public void update()
 	{
-		final double dt = 1/60.0;
-		backWheel.x += carSpeed * dt * Math.cos(carHeading);
-		backWheel.y += carSpeed * dt * Math.sin(carHeading);
-		frontWheel.x += carSpeed * dt * (Math.cos(carHeading + steerAngle));
-		frontWheel.y += carSpeed * dt * (Math.sin(carHeading + steerAngle));
+		final double dt = 1/100.0;
+		//backWheel.x += carSpeed * dt * Math.cos(carHeading);
+		//backWheel.y += carSpeed * dt * Math.sin(carHeading);
+		frontWheel.x += carSpeed * dt * (Math.cos(carHeading));
+		frontWheel.y += carSpeed * dt * (Math.sin(carHeading));
+		
+		backWheel.y = frontWheel.y - wheelBase*Math.sin(carHeading);
+		backWheel.x = frontWheel.x - wheelBase*Math.cos(carHeading);
 		
 		carLocation.x = (frontWheel.x + backWheel.x)/2;
 		carLocation.y = (frontWheel.y + backWheel.y)/2;
 		
-		carHeading = Math.atan2(frontWheel.y - backWheel.y, frontWheel.x - backWheel.x);
-		printData();
+		System.out.println(Math.sqrt((backWheel.x - frontWheel.x)*(backWheel.x - frontWheel.x) + (backWheel.y - frontWheel.y)*(backWheel.y - frontWheel.y)));
+		
+		//carHeading = Math.atan2(frontWheel.y - backWheel.y, frontWheel.x - backWheel.x);
+		//printData();
+		carHeading -= steerAngle/400;
+		System.out.println(System.nanoTime());
 	}
 	
 	public void printData()
@@ -86,7 +97,7 @@ public class Car{
 				//repaint();
 				
 				try {
-					TimeUnit.MILLISECONDS.sleep(50);
+					TimeUnit.MILLISECONDS.sleep(25);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

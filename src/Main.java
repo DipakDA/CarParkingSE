@@ -10,7 +10,8 @@ public class Main extends JPanel{
 	 * 
 	 */
 	
-	private static Car car = new Car(new Pair(4, 6), 270*(Math.PI/180), 2, 0, 2);
+	private static Car car = new Car(new Pair(4, 6), 270*(Math.PI/180), 2, 0, 1.5, 0.5);
+	private static int[][] grid;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -25,6 +26,8 @@ public class Main extends JPanel{
 	@Override
 	public void paintComponent(Graphics g)
 	{
+		// 0.5 is the car's distance between front tyres
+		
 		super.paintComponent(g);
 		System.out.println("ndjsn");
 		Graphics2D g2d = (Graphics2D)g;
@@ -32,6 +35,20 @@ public class Main extends JPanel{
 				(int)(car.getFrontWheel().y * 100),
 				(int)(car.getBackWheel().x * 100), 
 				(int)(car.getBackWheel().y * 100));
+		g2d.drawLine((int)((car.getFrontWheel().x + .5*Math.sin( car.getCarHeading()))* 100), 
+				(int)((car.getFrontWheel().y + Math.abs(.5*Math.cos( car.getCarHeading())))* 100),
+				(int)((car.getBackWheel().x + .5*Math.sin(car.getCarHeading()))* 100), 
+				(int)((car.getBackWheel().y + Math.abs(.5*Math.cos(car.getCarHeading())))* 100));
+		g2d.drawLine((int)((car.getBackWheel().x + .5*Math.sin(car.getCarHeading()))* 100), 
+					(int)((car.getBackWheel().y + Math.abs(.5*Math.cos(car.getCarHeading())))* 100),
+					(int)(car.getBackWheel().x * 100), 
+					(int)(car.getBackWheel().y * 100));
+		g2d.drawLine((int)(car.getFrontWheel().x * 100), 
+					(int)(car.getFrontWheel().y * 100),
+					(int)((car.getFrontWheel().x + .5*Math.sin( car.getCarHeading()))* 100), 
+					(int)((car.getFrontWheel().y + Math.abs(.5*Math.cos( car.getCarHeading())))* 100));
+		
+		
 				//(int)((Math.cos(car.getSteerAngle() - car.getCarHeading()) * 2)*100 + car.getFrontWheel().x*100),
 				//(int)((Math.sin(car.getSteerAngle() - car.getCarHeading()) * 2)*100 + car.getFrontWheel().y*100));			
 		
@@ -69,6 +86,22 @@ public class Main extends JPanel{
 		//car wheelBase = 3
 		System.out.println("Starting main thread");
 		
+		grid = new int[1000][1000];
+		for(int i=0;i<1000;i++)
+		{
+			for(int j=0;j<1000;j++)
+			{
+				if(i<200 && j<800)
+				{
+					grid[i][j] = 1;
+				}
+				else
+				{
+					grid[i][j] = 0;
+				}
+			}
+		}
+		
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(new Main());
 		frame.setTitle("2D Car Parking Simulation");
@@ -77,21 +110,37 @@ public class Main extends JPanel{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		
-		long start = System.currentTimeMillis();
-		long end = start + 6*1000;
+		long start = 0;
+		long end = 0;
+		int count = 0;
 		//while(car.getRunning())
-			while(System.currentTimeMillis() < end)
+			while(true)
 			{
-			
 				car.run();
 				frame.getContentPane().repaint();
+				count++;
+				if(count == 1000) {
+					break;
+				}
 			}
 		
 		
 		car.setSteerAngle(270*(Math.PI/180));
 		
 		 start = System.currentTimeMillis();
-		 end = start + 3*1000;
+		 end = start + 3475;
+		//while(car.getRunning())
+		 while(System.currentTimeMillis() < end)
+			{
+			
+				car.run();
+				frame.getContentPane().repaint();
+			}
+		 
+		 car.setSteerAngle(0);
+			
+		 start = System.currentTimeMillis();
+		 end = start + 3000;
 		//while(car.getRunning())
 		 while(System.currentTimeMillis() < end)
 			{
