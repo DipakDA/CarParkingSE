@@ -10,7 +10,7 @@ public class Main extends JPanel{
 	 * 
 	 */
 	
-	private static Car car = new Car(new Pair(4, 6), 270*(Math.PI/180), 2, 0, 1.5, 0.5);
+	private static Car car = new Car(new Pair(4, 6), 270*(Math.PI/180), 2, 0, 1, 0.5);
 	private static int[][] grid;
 	
 	private static final long serialVersionUID = 1L;
@@ -112,23 +112,21 @@ public class Main extends JPanel{
 		
 		long start = 0;
 		long end = 0;
-		int count = 0;
+		start = System.currentTimeMillis();
+		 end = start + 3300;
 		//while(car.getRunning())
-			while(true)
+		 while(System.currentTimeMillis() < end)
 			{
+			
 				car.run();
 				frame.getContentPane().repaint();
-				count++;
-				if(count == 1000) {
-					break;
-				}
 			}
 		
 		
 		car.setSteerAngle(270*(Math.PI/180));
-		
+		car.setSpeed(1.5);
 		 start = System.currentTimeMillis();
-		 end = start + 3475;
+		 end = start + 6300;
 		//while(car.getRunning())
 		 while(System.currentTimeMillis() < end)
 			{

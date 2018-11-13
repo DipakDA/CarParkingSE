@@ -13,7 +13,7 @@ public class Car{
 	//center of car location;
 	private double carHeading;
 	//angle with the x axis
-	private final double carSpeed;
+	private double carSpeed;
 	//speed of car from back angle;
 	private double steerAngle;
 	//turn angle(of front wheel)
@@ -62,7 +62,7 @@ public class Car{
 		
 		//carHeading = Math.atan2(frontWheel.y - backWheel.y, frontWheel.x - backWheel.x);
 		//printData();
-		carHeading -= steerAngle/400;
+		carHeading -= steerAngle/700;
 		System.out.println(System.nanoTime());
 	}
 	
@@ -135,6 +135,11 @@ public class Car{
 	
 	public void setSteerAngle(double angle) {
 		this.steerAngle = angle;
+	}
+	
+	public void setSpeed(double x)
+	{
+		this.carSpeed = x;
 	}
 	
 }

@@ -1,14 +1,14 @@
 
 public class ProximitySensor {
 	private int[][] grid;
-	private boolean found;
-	private int currWidth;
-	private int requiredLength;
-	private int requiredWidth;
+	private double requiredLength;
+	private double requiredWidth;
+	boolean found = false;
+	double currWidth = 0;
 	//length is the wheelbase
 	//width is the slot distance that sensor will give
 	
-	public ProximitySensor(int wheelBase, int carWidth, int[][] GRID)
+	public ProximitySensor(double wheelBase, int carWidth, int[][] GRID)
 	{
 		this.requiredLength = wheelBase;
 		this.requiredWidth = carWidth;
@@ -32,7 +32,18 @@ public class ProximitySensor {
 		//NEED TO MAKE NECESSARY CHANGE IN THE CALLING FUNCTION IN MAIN
 		//EDIT THIS AFTER THE CHANGE IS DONE
 		
-		for(int j = backWheel.y; )
+		/*for(int j = backWheel.y; )*/
+		
+		int x = 100*((int)(backWheel.x - this.requiredWidth/2));
+		int y = 100*(int)backWheel.y;
+		
+		
+		/*for(int i = x - ((int)(this.requiredLength)*100); i <=x; i++ )
+		{
+			
+		}*/
+		
+		
 		
 		return false;
 	}
