@@ -10,6 +10,7 @@ public class Main extends JPanel{
 	 * 
 	 */
 	
+	private static int caseNo = 2;
 	private static Car car = new Car(new Pair(4, 6), 270*(Math.PI/180), 2, 0, 1, 0.5);
 	private static int[][] grid;
 	
@@ -52,29 +53,17 @@ public class Main extends JPanel{
 				//(int)((Math.cos(car.getSteerAngle() - car.getCarHeading()) * 2)*100 + car.getFrontWheel().x*100),
 				//(int)((Math.sin(car.getSteerAngle() - car.getCarHeading()) * 2)*100 + car.getFrontWheel().y*100));			
 		
-		g2d.fillRect(800,0,200,1000);	
-		g2d.fillRect(0,200,200,800);	
+		if(caseNo == 1){
+			g2d.fillRect(800,0,200,1000);	
+			g2d.fillRect(0,200,200,250);	
+			g2d.fillRect(0,500,200,300);	
+		}
+		else if(caseNo == 2){
+			g2d.fillRect(800,0,200,1000);	
+			g2d.fillRect(0,0,200,300);	
+			g2d.fillRect(0,450,200,300);	
+		}
 		
-		//For the car
-		//AffineTransform old = g2d.getTransform();
-		/*g2d.rotate(Math.toRadians(00));
-		g2d.fillRect(500,400, ((int)car.getWheelBase() ) * 100, 50);
-		
-		g2d.rotate(30.0 * Math.PI / 180.0);
-		g2d.fillRect(500,400, ((int)car.getWheelBase() ) * 100, 50);
-		
-		g2d.rotate(Math.toRadians(10));
-		g2d.fillRect(400,400, ((int)car.getWheelBase() ) * 100, 50);
-		
-		g2d.rotate(Math.toRadians(30));
-		g2d.fillRect(400,400, ((int)car.getWheelBase() ) * 100, 50);
-		
-		g2d.rotate(Math.toRadians(40));
-		g2d.fillRect(400,400, ((int)car.getWheelBase() ) * 100, 50);*/
-		//g2d.setTransform(old);
-		//g2d.fillRect(800,0,200,1000);	
-		//g2d.fillRect(0,200,200,800);	
-		//g.drawLine(x1, y1, x2, y2);
 	}
 	
 	public static void main(String[] args)
@@ -112,8 +101,24 @@ public class Main extends JPanel{
 		
 		long start = 0;
 		long end = 0;
+		
+		
+		if(caseNo == 1) {
 		start = System.currentTimeMillis();
 		 end = start + 3300;
+		 end = end + 2700;
+		//while(car.getRunning())
+		 while(System.currentTimeMillis() < end)
+			{
+			
+				car.run();
+				frame.getContentPane().repaint();
+			}
+			
+		
+		 start = System.currentTimeMillis();
+		 end = start + 2900;
+		 car.setSpeed(-2);
 		//while(car.getRunning())
 		 while(System.currentTimeMillis() < end)
 			{
@@ -126,7 +131,7 @@ public class Main extends JPanel{
 		car.setSteerAngle(270*(Math.PI/180));
 		car.setSpeed(1.5);
 		 start = System.currentTimeMillis();
-		 end = start + 6300;
+		 end = start + 6000;
 		//while(car.getRunning())
 		 while(System.currentTimeMillis() < end)
 			{
@@ -138,7 +143,7 @@ public class Main extends JPanel{
 		 car.setSteerAngle(0);
 			
 		 start = System.currentTimeMillis();
-		 end = start + 3000;
+		 end = start + 2700;
 		//while(car.getRunning())
 		 while(System.currentTimeMillis() < end)
 			{
@@ -146,33 +151,57 @@ public class Main extends JPanel{
 				car.run();
 				frame.getContentPane().repaint();
 			}
-		/*
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
-		System.out.println("Rinal");
-		x1 = 100;
-		x2 = 200;
-		y1 = 100;
-		y2 = 200;
-		frame.getContentPane().repaint();
+		else if(caseNo == 2){
+			start = System.currentTimeMillis();
+		 //end = start + 3300;
+		 end = start + 2500;
+		//while(car.getRunning())
+		 while(System.currentTimeMillis() < end)
+			{
+			
+				car.run();
+				frame.getContentPane().repaint();
+			}
+			
 		
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		 start = System.currentTimeMillis();
+		 end = start + 2800;
+		 car.setSpeed(-2);
+		//while(car.getRunning())
+		 while(System.currentTimeMillis() < end)
+			{
+			
+				car.run();
+				frame.getContentPane().repaint();
+			}
+		
+		
+		car.setSteerAngle(270*(Math.PI/180));
+		car.setSpeed(1.5);
+		 start = System.currentTimeMillis();
+		 end = start + 6000;
+		//while(car.getRunning())
+		 while(System.currentTimeMillis() < end)
+			{
+			
+				car.run();
+				frame.getContentPane().repaint();
+			}
+		 
+		 car.setSteerAngle(0);
+			
+		 start = System.currentTimeMillis();
+		 end = start + 2700;
+		//while(car.getRunning())
+		 while(System.currentTimeMillis() < end)
+			{
+			
+				car.run();
+				frame.getContentPane().repaint();
+			}
 		}
 		
-		x1 = 200;
-		x2 = 300;
-		y1 = 200;
-		y2 = 300;
-		frame.getContentPane().repaint();
-		*/
 	}
 }
