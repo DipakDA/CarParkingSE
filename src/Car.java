@@ -77,7 +77,7 @@ public class Car{
 	public void run()
 	{
 		//this thread is for keyboard interrupt to stop the code
-		new Thread() {
+		/*new Thread() {
 			public void run() {
 				try (Scanner scanner = new Scanner(System.in)) {
 					boolean keepWaiting = true;
@@ -91,7 +91,7 @@ public class Car{
 				}
 			}
 		}.start();
-
+		*/
 				//handles all of the logic restricted time
 				update();
 				//repaint();
